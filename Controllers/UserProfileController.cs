@@ -12,6 +12,7 @@ using System.IO;
 using System.Security.Cryptography;
 using System.Data.Entity.Infrastructure;
 using System.Text;
+using UserProfileAPIDemo.Areas.Common;
 
 namespace UserProfileAPIDemo.Controllers
 {
@@ -53,11 +54,11 @@ namespace UserProfileAPIDemo.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(UserProfile userProfile)
         {
-            byte[] salt = GenerateSalt();
+            byte[] salt = PasswordEncryption.GenerateSalt();
             var password = Encoding.UTF8.GetBytes(userProfile.Password);
             string generatedSalt = Convert.ToBase64String(salt);
 
-            var hashedPassword   = HashPasswordWithSalt(password, salt);
+            var hashedPassword   = PasswordEncryption.HashPasswordWithSalt(password, salt);
             userProfile.Password = Convert.ToBase64String(hashedPassword);
 
 
@@ -108,11 +109,11 @@ namespace UserProfileAPIDemo.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(UserProfile userProfile)
         {
-            byte[] salt = GenerateSalt();
+            byte[] salt = PasswordEncryption.GenerateSalt();
             var password = Encoding.UTF8.GetBytes(userProfile.Password);
             string generatedSalt = Convert.ToBase64String(salt);
 
-            var hashedPassword = HashPasswordWithSalt(password, salt);
+            var hashedPassword = PasswordEncryption.HashPasswordWithSalt(password, salt);
             userProfile.Password = Convert.ToBase64String(hashedPassword);
 
             if (ModelState.IsValid)
@@ -161,37 +162,6 @@ namespace UserProfileAPIDemo.Controllers
             base.Dispose(disposing);
         }
 
-        public static byte[] GenerateSalt()
-        {
-            const int saltLength = 32;
-
-            using(var randomNumberGenerator = new RNGCryptoServiceProvider())
-            {
-                var randomNumber = new byte[saltLength];
-                randomNumberGenerator.GetBytes(randomNumber);
-
-                return randomNumber;
-            }
-        }
-
-        public static byte[] Combine(byte[] first, byte[] second)
-        {
-            var ret = new byte[first.Length + second.Length];
-
-            Buffer.BlockCopy(first, 0, ret, 0, first.Length);
-            Buffer.BlockCopy(second, 0, ret, first.Length, second.Length);
-
-            return ret;
-        }
-
-        public static byte[] HashPasswordWithSalt(byte[] toBeHashed, byte[] salt)
-        {
-            using (var sha256 = SHA256.Create())
-            {
-                var combinedHash = Combine(toBeHashed, salt);
-
-                return sha256.ComputeHash(combinedHash);
-            }
-        }
+        
     }
 }
