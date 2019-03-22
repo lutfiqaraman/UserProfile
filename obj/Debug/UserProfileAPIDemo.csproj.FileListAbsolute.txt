@@ -91,3 +91,4 @@ C:\Users\lutfi\Documents\Visual Studio 2017\Projects\UserProfileAPIDemo\UserProf
 C:\Users\lutfi\Documents\Visual Studio 2017\Projects\UserProfileAPIDemo\UserProfileAPIDemo\obj\Debug\UserProfileAPIDemo.csproj.CopyComplete
 C:\Users\lutfi\Documents\Visual Studio 2017\Projects\UserProfileAPIDemo\UserProfileAPIDemo\obj\Debug\UserProfileAPIDemo.dll
 C:\Users\lutfi\Documents\Visual Studio 2017\Projects\UserProfileAPIDemo\UserProfileAPIDemo\obj\Debug\UserProfileAPIDemo.pdb
+C:\Users\lutfi\Documents\Visual Studio 2017\Projects\UserProfileAPIDemo\UserProfileAPIDemo\obj\Debug\UserProfileAPIDemo.csprojAssemblyReference.cache

@@ -56,8 +56,7 @@ namespace UserProfileAPIDemo.Controllers
         {
             byte[] salt = PasswordEncryption.GenerateSalt();
             var password = Encoding.UTF8.GetBytes(userProfile.Password);
-            string generatedSalt = Convert.ToBase64String(salt);
-
+            
             var hashedPassword   = PasswordEncryption.HashPasswordWithSalt(password, salt);
             userProfile.Password = Convert.ToBase64String(hashedPassword);
 
@@ -111,8 +110,7 @@ namespace UserProfileAPIDemo.Controllers
         {
             byte[] salt = PasswordEncryption.GenerateSalt();
             var password = Encoding.UTF8.GetBytes(userProfile.Password);
-            string generatedSalt = Convert.ToBase64String(salt);
-
+            
             var hashedPassword = PasswordEncryption.HashPasswordWithSalt(password, salt);
             userProfile.Password = Convert.ToBase64String(hashedPassword);
 
